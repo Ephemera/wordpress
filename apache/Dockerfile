@@ -22,6 +22,8 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
+RUN /bin/echo -e "upload_max_filesize = 32M\npost_max_size = 32M" >> /usr/local/etc/php/php.ini
+
 # grr, ENTRYPOINT resets CMD now
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
